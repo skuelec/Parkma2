@@ -9,7 +9,7 @@ import android.view.View;
  */
 
 public class LoginActivity extends Activity {
-
+    //Kommentar nach LoginActivity2
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
