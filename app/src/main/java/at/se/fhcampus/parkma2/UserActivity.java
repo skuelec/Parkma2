@@ -5,4 +5,5 @@ package at.se.fhcampus.parkma2;
  */
 
 public class UserActivity {
+
 }

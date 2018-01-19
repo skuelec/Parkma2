@@ -11,10 +11,15 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        for(int i=0;i<300000000;i++){};
+        try {
+            Thread.sleep(3000);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         Intent getLoginScreen = new Intent(this,
-                LoginActivity.class);
+                LoginActivity2.class);
 
         startActivity(getLoginScreen);
     }
