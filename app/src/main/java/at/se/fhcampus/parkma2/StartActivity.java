@@ -1,8 +1,10 @@
 package at.se.fhcampus.parkma2;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -10,17 +12,25 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+    }
 
-        try {
-            Thread.sleep(3000);
+    @Override
+    protected void onResume(){
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callLogin();
+            }
+        }, 3000);
+    }
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    private void callLogin(){
 
-        Intent getLoginScreen = new Intent(this,
-                LoginActivity2.class);
+        Intent getLoginScreen = new Intent(this, LoginActivity2.class);
 
         startActivity(getLoginScreen);
     }
+
+
 }

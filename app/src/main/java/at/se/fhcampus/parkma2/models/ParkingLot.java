@@ -7,7 +7,7 @@ package at.se.fhcampus.parkma2.models;
 public class ParkingLot {
 
     /* Attribute/Variablen */
-    private int id;
+    private String id;
     private String status;
 
     /* Konstruktoren */
@@ -15,13 +15,13 @@ public class ParkingLot {
 
     }
 
-    public ParkingLot(int id, String status){
+    public ParkingLot(String id, String status){
         this.id = id;
         this.status = status;
     }
 
     /* Methoden */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class ParkingLot {
         this.status = status;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -47,7 +48,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "admin:admin","test:test","foo@example.com:hello", "bar@example.com:world"
+            "admin:admin","campus09:campus09","foo@example.com:hello", "bar@example.com:world"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -69,6 +70,11 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        /**
+         * Bei Eingabe von Password im Textfeld
+         * und daraufhin Klicken von Enter Taste
+         * mache ein Login --> attemptLogin();
+         */
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -80,8 +86,8 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button mSignInButton = (Button) findViewById(R.id.sign_in_button);
+        mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -90,6 +96,9 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+
     }
 
     private void populateAutoComplete() {
@@ -126,7 +135,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
      * Callback received when a permissions request has been completed.
      *
      *
-     * MUSS SCHAUEN OB ES GEBRAUCHT WIRD
+     * TODO: MUSS NOCH SCHAUEN OB DAS GEBRAUCHT WIRD
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -173,6 +182,10 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             focusView = mUsernameView;
             cancel = true;
         }
+
+        /**
+         * Brauchen wir nicht weil wir nicht auf email-Addressen ueberpruefen wollen
+         */
         /*else if (!isEmailValid(username)) {
             mUsernameView.setError(getString(R.string.error_invalid_email));
             focusView = mUsernameView;
@@ -188,7 +201,13 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(username, password);
-            mAuthTask.execute((Void) null);
+            //mAuthTask.execute((Void) null);
+            if(mAuthTask != null) {
+                Intent getParkingList = new Intent(this,
+                        ParkingActivity.class);
+
+                startActivity(getParkingList);
+            }
         }
     }
 
@@ -204,6 +223,9 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
     /**
      * Shows the progress UI and hides the login form.
+     *
+     *
+     * TODO: MUSS NOCH SCHAUEN OB DAS GEBRAUCHT WIRD
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
@@ -328,6 +350,8 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             // TODO: register the new account here.
             return true;
         }
+
+
 
         @Override
         protected void onPostExecute(final Boolean success) {
