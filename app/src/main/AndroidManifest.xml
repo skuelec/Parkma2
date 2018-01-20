@@ -23,12 +23,13 @@
         </activity>
         <activity
             android:name=".LoginActivity2"
-            android:label="@string/title_activity_login2"></activity>
+            android:label="@string/title_activity_login2" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <activity android:name=".ParkingActivity"></activity>
     </application>
 
 </manifest>
