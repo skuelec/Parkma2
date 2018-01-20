@@ -27,8 +27,6 @@ public class StartActivity extends AppCompatActivity {
         animationDrawable.start();
     }
 
-
-
     @Override
     protected void onResume(){
         super.onResume();
