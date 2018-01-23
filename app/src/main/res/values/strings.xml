@@ -6,10 +6,9 @@
     <string name="prompt_username">Benutzername</string>
     <string name="prompt_password">Passwort</string>
     <string name="action_sign_in">EINLOGGEN UND LOSLEGEN</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">E-Mail-Adresse stimmt nicht</string>
+    <string name="action_sign_in_short">Los</string>
     <string name="error_invalid_password">Dieses Passwort ist zu kurz</string>
-    <string name="error_incorrect_password">Passwort stimmt nicht</string>
+    <string name="error_incorrect_password">Passwort oder Benutzername stimmt nicht</string>
     <string name="error_field_required">Dieses Feld ist zu befüllen!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
