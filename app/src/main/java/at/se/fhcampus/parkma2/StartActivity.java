@@ -20,7 +20,6 @@ public class StartActivity extends AppCompatActivity {
         relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayout);
 // onCreate
         animationDrawable =(AnimationDrawable)relativeLayout.getBackground();
-
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
 // onResume
@@ -41,7 +40,6 @@ public class StartActivity extends AppCompatActivity {
     private void callLogin(){
 
         Intent getLoginScreen = new Intent(this, LoginActivity2.class);
-
         startActivity(getLoginScreen);
     }
 

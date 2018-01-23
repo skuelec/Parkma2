@@ -1,0 +1,4 @@
+-App starten
+-Benutzerdaten eingeben:
+-Benutzername&Passwort: campus09:campus09 oder admin:admin
+-Parkplatzliste wird angezeigt

@@ -201,20 +201,18 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(username, password);
-            //mAuthTask.execute((Void) null);
-            if(mAuthTask != null) {
-                Intent getParkingList = new Intent(this,
-                        ParkingActivity.class);
-
-                startActivity(getParkingList);
-            }
+            mAuthTask.execute((Void) null);
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
+    /**
+     * Brauchen wir nicht da wir nicht auf email einschraenken
+     *
+     */
+//    private boolean isEmailValid(String email) {
+//        //TODO: Replace this with your own logic
+//        return email.contains("@");
+//    }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
@@ -320,11 +318,11 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
+        private final String mUsername;
         private final String mPassword;
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
+        UserLoginTask(String username, String password) {
+            mUsername = username;
             mPassword = password;
         }
 
@@ -341,14 +339,14 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
+                if (pieces[0].equals(mUsername)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
             }
 
             // TODO: register the new account here.
-            return true;
+            return false;
         }
 
 
@@ -360,6 +358,10 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
             if (success) {
                 finish();
+                Intent getParkingList = new Intent(LoginActivity2.this, ParkingActivity.class);
+
+                startActivity(getParkingList);
+
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
