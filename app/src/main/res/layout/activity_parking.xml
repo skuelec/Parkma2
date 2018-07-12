@@ -9,9 +9,10 @@
     android:paddingTop="16dp"
     tools:context="at.se.fhcampus.parkma2.ParkingActivity">
 
+
     <de.codecrafters.tableview.TableView
         android:id="@+id/tableView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

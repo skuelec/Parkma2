@@ -17,67 +17,42 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class ParkingActivity extends AppCompatActivity{
 
-    String[] parkingListHeaders = {"Parkplatznummer","Status"};
-    String[][] parkingList;
+    String[] parkingListHeaders = {"Parkplatznummer","Status", "Besetzen", "Reservieren"};
+
+    ArrayList<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking);
 
-
-        final TableView<String[]> tb= (TableView<String[]>) findViewById(R.id.tableView);
-        tb.setColumnCount(2);
-        tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-
-        //Tabelle wird befuellt
         populateData();
 
+        final TableView<ParkingLot> tableView= (TableView<ParkingLot>) findViewById(R.id.tableView);
+        tableView.setColumnCount(4);
+        tableView.setHeaderBackgroundColor(Color.parseColor("#3F51B5"));
+
+        ParkingAdapter parkingAdapter = new ParkingAdapter(this, parkingLots);
+        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(this, parkingListHeaders);
+
+        simpleTableHeaderAdapter.setTextColor(0xFFFFFFFF);
 
         //Adapter werden hinzugefuegt
-        tb.setHeaderAdapter(new SimpleTableHeaderAdapter(this, parkingListHeaders));
-        tb.setDataAdapter(new SimpleTableDataAdapter(this,parkingList));
+        tableView.setHeaderAdapter(simpleTableHeaderAdapter);
+        tableView.setDataAdapter(parkingAdapter);
 
     }
 
     private void populateData(){
 
-        ParkingLot parkingLot = new ParkingLot();
-
-        ArrayList<ParkingLot> parkingLotList = new ArrayList<>();
-
-
-        parkingLot.setId("1");
-        parkingLot.setStatus("FREI");
-        parkingLotList.add(parkingLot);
-
-        parkingLot = new ParkingLot();
-        parkingLot.setId("2");
-        parkingLot.setStatus("FREI");
-        parkingLotList.add(parkingLot);
-
-        parkingLot = new ParkingLot();
-        parkingLot.setId("3");
-        parkingLot.setStatus("FREI");
-        parkingLotList.add(parkingLot);
-
-        parkingLot = new ParkingLot();
-        parkingLot.setId("4");
-        parkingLot.setStatus("FREI");
-        parkingLotList.add(parkingLot);
-
-
-        parkingList = new String[parkingLotList.size()][2];
-
-
-        for(int i=0; i<parkingLotList.size(); i++){
-
-            ParkingLot p = parkingLotList.get(i);
-
-            parkingList[i][0] = p.getId();
-            parkingList[i][1] = p.getStatus();
-
-        }
+        parkingLots.add(new ParkingLot("1","frei"));
+        parkingLots.add(new ParkingLot("2","frei"));
+        parkingLots.add(new ParkingLot("3","frei"));
+        parkingLots.add(new ParkingLot("4","frei"));
+        parkingLots.add(new ParkingLot("5","frei"));
+        parkingLots.add(new ParkingLot("6","frei"));
+        parkingLots.add(new ParkingLot("7","frei"));
 
     }
+
 }

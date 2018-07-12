@@ -24,6 +24,14 @@ public class StartActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(2000);
 // onResume
         animationDrawable.start();
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callLogin();
+            }
+        }, 3000);
     }
 
     @Override
@@ -35,6 +43,7 @@ public class StartActivity extends AppCompatActivity {
                 callLogin();
             }
         }, 3000);
+
     }
 
     private void callLogin(){
