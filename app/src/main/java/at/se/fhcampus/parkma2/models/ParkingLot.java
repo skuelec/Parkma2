@@ -12,7 +12,7 @@ public class ParkingLot {
     private int checkReserviert = NO_CHECK;
 
     private static final int NO_CHECK = -1;
-
+    private static final int CHECK = 0;
 
 
     public ParkingLot(){
