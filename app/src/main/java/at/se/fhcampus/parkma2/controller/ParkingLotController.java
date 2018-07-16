@@ -26,6 +26,7 @@ public class ParkingLotController {
         parkingLots.add(new ParkingLot("5","frei"));
         parkingLots.add(new ParkingLot("6","frei"));
         parkingLots.add(new ParkingLot("7","besetzt"));
+        
 
 
     }
