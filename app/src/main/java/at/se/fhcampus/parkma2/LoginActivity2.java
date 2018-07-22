@@ -31,12 +31,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.se.fhcampus.parkma2.controller.ParkingLotController;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks<Cursor>  {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -61,6 +63,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
     private View mProgressView;
     private View mLoginFormView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,7 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
         populateAutoComplete();
+
 
         mPasswordView = (EditText) findViewById(R.id.password);
         /**
@@ -358,8 +362,8 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
 
             if (success) {
                 finish();
-                Intent getParkingList = new Intent(LoginActivity2.this, ParkingActivity.class);
 
+                Intent getParkingList = new Intent(LoginActivity2.this, ParkingActivity.class);
                 startActivity(getParkingList);
 
             } else {

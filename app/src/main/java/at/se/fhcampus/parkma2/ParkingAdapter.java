@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import at.se.fhcampus.parkma2.models.ParkingLot;
@@ -14,7 +15,7 @@ import de.codecrafters.tableview.TableDataAdapter;
 public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
 
 
-    public ParkingAdapter(Context context, List<ParkingLot> parkingLotList)
+    public ParkingAdapter(Context context, ArrayList<ParkingLot> parkingLotList)
     {
         super(context,parkingLotList);
 
@@ -28,32 +29,30 @@ public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
         View renderedView = null;
 
         switch (columnIndex){
-
             case 0:
-                renderedView = renderId(parkingLot,parentView);
+                renderedView = renderId(parkingLot);
                 break;
-
             case 1:
-                renderedView = renderStatus(parkingLot,parentView);
+                renderedView = renderStatus(parkingLot);
                 break;
             case 2:
                 renderedView = renderBesetzenCheckbox(parkingLot, parentView);
                 break;
             case 3:
-                renderedView= renderBesetzenCheckbox(parkingLot, parentView);
+                renderedView= renderReservierenCheckbox(parkingLot, parentView);
                 break;
         }
         return renderedView;
     }
 
-    public View renderId (ParkingLot parkingLot, ViewGroup parentView){
+    public View renderId (ParkingLot parkingLot){
         TextView textView = new TextView(getContext());
         textView.setText(parkingLot.getId());
 
         return textView;
     }
 
-    public View renderStatus (ParkingLot parkingLot, ViewGroup parentView){
+    public View renderStatus (ParkingLot parkingLot){
         TextView textView = new TextView(getContext());
         textView.setText(parkingLot.getStatus());
 
@@ -70,17 +69,16 @@ public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
             @Override
             public void onClick(View view) {
                 parkingLot.setStatus("besetzt");
+                notifyDataSetChanged();
             }
         });
 
         if (parkingLot.getStatus() == "frei"){
             checkBox.setEnabled(true);
         }
-        else if (parkingLot.getStatus() == "besetzt"){
+        else if (parkingLot.getStatus() == "besetzt" || parkingLot.getStatus()=="reserviert"){
             checkBox.setEnabled(false);
-
         }
-
 
         return view;
     }
@@ -91,22 +89,21 @@ public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
 
         CheckBox checkBox = view.findViewById(R.id.checkbox);
 
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parkingLot.setStatus("reserviert");
+                notifyDataSetChanged();
+
+            }
+        });
 
         if (parkingLot.getStatus() == "frei"){
             checkBox.setEnabled(true);
         }
-        else if (parkingLot.getStatus() == "besetzt"){
+        else if (parkingLot.getStatus() == "besetzt" || parkingLot.getStatus() == "reserviert"){
             checkBox.setEnabled(false);
-
         }
-
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                parkingLot.setStatus("besetzt");
-            }
-        });
-
 
         return view;
     }

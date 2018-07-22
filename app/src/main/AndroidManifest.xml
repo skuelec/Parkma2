@@ -17,15 +17,13 @@
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity2"
-            android:label="@string/title_activity_login2"></activity>
-        <activity android:name=".ParkingActivity"></activity>
-
+            android:label="@string/title_activity_login2"/>
+        <activity android:name=".ParkingActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

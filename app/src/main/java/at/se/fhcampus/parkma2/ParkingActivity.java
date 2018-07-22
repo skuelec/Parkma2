@@ -26,7 +26,6 @@ public class ParkingActivity extends AppCompatActivity{
 
     static String[] parkingListHeaders = {"Parkplatznummer","Status", "Besetzen", "Reservieren"};
 
-   ParkingLotController parkingLots = new ParkingLotController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,7 @@ public class ParkingActivity extends AppCompatActivity{
         tableView.setColumnCount(4);
         tableView.setHeaderBackgroundColor(Color.parseColor("#3F51B5"));
 
-        ParkingAdapter parkingAdapter = new ParkingAdapter(this, parkingLots.getParkingLots());
+        ParkingAdapter parkingAdapter = new ParkingAdapter(this, ParkingLotController.parkingLotController.getParkingLots());
         SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(this, parkingListHeaders);
 
         simpleTableHeaderAdapter.setTextColor(0xFFFFFFFF);

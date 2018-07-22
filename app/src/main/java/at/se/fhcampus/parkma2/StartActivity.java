@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.graphics.drawable.AnimationDrawable;
 import android.widget.RelativeLayout;
 
+import at.se.fhcampus.parkma2.controller.ParkingLotController;
+
 public class StartActivity extends AppCompatActivity {
 
     AnimationDrawable animationDrawable;
@@ -18,11 +20,11 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayout);
-// onCreate
+
         animationDrawable =(AnimationDrawable)relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
-// onResume
+
         animationDrawable.start();
 
 

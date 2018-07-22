@@ -1,10 +1,12 @@
 package at.se.fhcampus.parkma2.models;
 
+import java.io.Serializable;
+
 /**
  * Created by kuele on 27.12.2017.
  */
 
-public class ParkingLot {
+public class ParkingLot{
 
     private String id;
     private String status;
