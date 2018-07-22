@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class ParkingActivity extends AppCompatActivity{
 
-    static String[] parkingListHeaders = {"Parkplatznummer","Status", "Besetzen", "Reservieren"};
+    static String[] parkingListHeaders = {"Parkplatznr.","Status", "Besetzen", "Reservieren","Freigeben"};
 
 
     @Override
@@ -34,17 +35,23 @@ public class ParkingActivity extends AppCompatActivity{
 
 
         final TableView<ParkingLot> tableView= (TableView<ParkingLot>) findViewById(R.id.tableView);
-        tableView.setColumnCount(4);
+        tableView.setColumnCount(5);
         tableView.setHeaderBackgroundColor(Color.parseColor("#3F51B5"));
 
-        ParkingAdapter parkingAdapter = new ParkingAdapter(this, ParkingLotController.parkingLotController.getParkingLots());
-        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(this, parkingListHeaders);
 
-        simpleTableHeaderAdapter.setTextColor(0xFFFFFFFF);
+        ParkingAdapter parkingAdapter = new ParkingAdapter(this, ParkingLotController.parkingLotController.getParkingLots());
+        //SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(this, parkingListHeaders);
+        //simpleTableHeaderAdapter.setTextColor(0xFFFFFFFF);
+
+        ParkingTableHeaderAdapter parkingTableHeaderAdapter = new ParkingTableHeaderAdapter(this,parkingListHeaders);
+
+
 
         //Adapter werden hinzugefuegt
-        tableView.setHeaderAdapter(simpleTableHeaderAdapter);
+        tableView.setHeaderAdapter(parkingTableHeaderAdapter);
         tableView.setDataAdapter(parkingAdapter);
+
+
 
     }
 }
