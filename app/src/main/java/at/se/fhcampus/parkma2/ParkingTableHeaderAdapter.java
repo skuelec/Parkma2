@@ -19,8 +19,8 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 public class ParkingTableHeaderAdapter extends TableHeaderAdapter {
 
     private String[] headers;
-    private int textSize = 11;
-    //private int typeface = Typeface.BOLD;
+    private int textSize = 13;
+    private int typeface = Typeface.BOLD;
     private int textColor = 0xFFFFFFFF;
 
 
@@ -35,15 +35,13 @@ public class ParkingTableHeaderAdapter extends TableHeaderAdapter {
 
         TextView textView = new TextView(getContext());
 
-        //TableColumnModel tableColumnModel = getColumnModel();
-
         textView.setText(headers[columnIndex]);
-        //textView.setTypeface(textView.getTypeface(), typeface);
+        textView.setTypeface(textView.getTypeface(), typeface);
         textView.setTextSize(textSize);
         textView.setTextColor(textColor);
         textView.setSingleLine();
         textView.setEllipsize(TextUtils.TruncateAt.END);
-        textView.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        //textView.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
         return textView;
     }

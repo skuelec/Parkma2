@@ -12,6 +12,8 @@ import java.util.List;
 
 import at.se.fhcampus.parkma2.models.ParkingLot;
 import de.codecrafters.tableview.TableDataAdapter;
+import de.codecrafters.tableview.model.TableColumnModel;
+import de.codecrafters.tableview.model.TableColumnWeightModel;
 
 public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
 
@@ -87,6 +89,8 @@ public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
             checkBox.setEnabled(false);
         }
 
+
+
         return checkBox;
     }
 
@@ -115,6 +119,8 @@ public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
             }
             checkBox.setEnabled(false);
         }
+
+
 
         return checkBox;
     }
