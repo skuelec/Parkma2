@@ -16,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String INT_TYPE = " INTEGER";
+    private static String test= null;
 
 
     public static final String CREATE_TABLE_PARKINGLOT =
