@@ -1,6 +1,8 @@
 package at.se.fhcampus.parkma2;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -34,15 +36,18 @@ public class ParkingActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking);
 
-
         final TableView<ParkingLot> tableView= (TableView<ParkingLot>) findViewById(R.id.tableView);
         tableView.setColumnCount(5);
         tableView.setHeaderBackgroundColor(Color.parseColor("#3F51B5"));
 
+        DatabaseHelper dbHelper = DatabaseHelper.getInstance(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        ParkingAdapter parkingAdapter = new ParkingAdapter(this, ParkingLotController.parkingLotController.getParkingLots());
-        //SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(this, parkingListHeaders);
-        //simpleTableHeaderAdapter.setTextColor(0xFFFFFFFF);
+        ParkingLotController.parkingLotController = new ParkingLotController(db);
+
+        ParkingAdapter parkingAdapter = new ParkingAdapter(this, ParkingLotController.parkingLotController.getDatabaseEntries());
+
+        //ParkingAdapter parkingAdapter = new ParkingAdapter(this, ParkingLotController.parkingLotController.getParkingLotResults());
 
 
         ParkingTableHeaderAdapter parkingTableHeaderAdapter = new ParkingTableHeaderAdapter(this,parkingListHeaders);

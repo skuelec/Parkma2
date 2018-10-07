@@ -1,13 +1,19 @@
 package at.se.fhcampus.parkma2;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.drawable.AnimationDrawable;
 import android.widget.RelativeLayout;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import at.se.fhcampus.parkma2.controller.ParkingLotController;
+import at.se.fhcampus.parkma2.models.ParkingLot;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -26,6 +32,34 @@ public class StartActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(2000);
 
         animationDrawable.start();
+
+        //Delete DB
+        getApplicationContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);
+
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
+
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        final ArrayList<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+        parkingLots.add(new ParkingLot("1","frei"));
+        parkingLots.add(new ParkingLot("2","frei"));
+        parkingLots.add(new ParkingLot("3","frei"));
+        parkingLots.add(new ParkingLot("4","frei"));
+        parkingLots.add(new ParkingLot("5","frei"));
+        parkingLots.add(new ParkingLot("6","frei"));
+        parkingLots.add(new ParkingLot("7","frei"));
+
+        for (ParkingLot p : parkingLots){
+
+            values.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_ID, p.getId());
+            values.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_STATE, p.getStatus());
+
+            db.insert(ParkinglotContract.ParkinglotEntry.TABLE_NAME,null,values);
+        }
+
+        parkingLots.clear();
 
 
         new Handler().postDelayed(new Runnable() {
