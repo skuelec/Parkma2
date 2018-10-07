@@ -15,12 +15,5 @@ public final class ParkinglotContract {
 
     }
 
-    public static class Users implements  BaseColumns{
-        public static final String TABLE_NAME = "users";
-        public static final String COLUMN_NAME_USER_ID = "user_id";
-        public static final String COLUMN_NAME_USER_NAME = "user_name";
-        public static final String COLUMN_NAME_USER_PW = "user_password";
-
-    }
 
 }

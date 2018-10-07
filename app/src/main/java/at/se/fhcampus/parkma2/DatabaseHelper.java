@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.awt.font.TextAttribute;
+
 import at.se.fhcampus.parkma2.models.ParkingLot;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -28,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS "
                     + ParkinglotContract.ParkinglotEntry.TABLE_NAME;
 
+
     public DatabaseHelper (Context context) {
 
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,7 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL(CREATE_TABLE_PARKINGLOT);
-        //sqLiteDatabase.execSQL(CREATE_TABLE);
 
         Log.d("Database Operations", "Table created...");
 
@@ -47,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
         sqLiteDatabase.execSQL(DROP_TABLE_PARKINGLOT);
+
         onCreate(sqLiteDatabase);
 
     }
@@ -61,15 +64,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ref;
     }
 
-
-    public void addParkplatz(int id, int parkplatznummer, String status, SQLiteDatabase database) {
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_ID,id);
-        contentValues.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_STATE, status);
-
-        database.insert(ParkinglotContract.ParkinglotEntry.TABLE_NAME, null, contentValues);
-        Log.d("Database Operations", "One Raw inserted...");
-
-    }
 }

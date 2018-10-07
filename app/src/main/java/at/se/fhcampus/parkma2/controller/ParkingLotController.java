@@ -60,12 +60,10 @@ public class ParkingLotController{
                 ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_STATE,
         };
 
-        String selection = ParkinglotContract.ParkinglotEntry.TABLE_NAME ;
-
 
         Cursor c = db.query(
                 ParkinglotContract.ParkinglotEntry.TABLE_NAME,
-                projection, selection,
+                projection, null,
                 null,
                 null,
                 null,

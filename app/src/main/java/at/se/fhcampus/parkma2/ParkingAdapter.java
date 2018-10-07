@@ -1,6 +1,8 @@
 package at.se.fhcampus.parkma2;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -16,6 +18,9 @@ import de.codecrafters.tableview.model.TableColumnModel;
 import de.codecrafters.tableview.model.TableColumnWeightModel;
 
 public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
+
+    private DatabaseHelper dbHelper = DatabaseHelper.getInstance(getContext());
+    private final SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
     public ParkingAdapter(Context context, ArrayList<ParkingLot> parkingLotList)
@@ -67,82 +72,123 @@ public class ParkingAdapter extends TableDataAdapter<ParkingLot>{
 
     public View renderBesetzenCheckbox(final ParkingLot parkingLot){
 
-        //View view = getLayoutInflater().inflate(R.layout.checkbox,parentView,false);
-
         CheckBox checkBox = new CheckBox(getContext());
 
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                parkingLot.setStatus("besetzt");
-                notifyDataSetChanged();
-            }
-        });
-
-        if (parkingLot.getStatus() == "frei"){
+        if (parkingLot.getStatus().equals("frei")){
             checkBox.setEnabled(true);
         }
-        else if (parkingLot.getStatus() == "besetzt" || parkingLot.getStatus()=="reserviert"){
-            if (parkingLot.getStatus() == "besetzt"){
+        else if (parkingLot.getStatus().equals("besetzt")  || parkingLot.getStatus().equals("reserviert")){
+            if (parkingLot.getStatus().equals("besetzt")){
                 checkBox.setChecked(true);
             }
             checkBox.setEnabled(false);
         }
 
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parkingLot.setStatus("besetzt");
 
+                String var = "besetzt";
+                ContentValues values = new ContentValues();
+                values.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_STATE, var);
+
+                String selection = ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_ID + " = " + parkingLot.getId();
+
+                int count = db.update(
+                        ParkinglotContract.ParkinglotEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        null);
+
+                System.out.println("Rows affected: " + count);
+
+
+                notifyDataSetChanged();
+            }
+        });
 
         return checkBox;
     }
 
     public View renderReservierenCheckbox(final ParkingLot parkingLot){
 
-        //View view = getLayoutInflater().inflate(R.layout.checkbox,parentView,false);
-
         CheckBox checkBox = new CheckBox(getContext());
 
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                parkingLot.setStatus("reserviert");
-                notifyDataSetChanged();
-
-            }
-        });
-
-        if (parkingLot.getStatus() == "frei"){
+        if (parkingLot.getStatus().equals("frei")){
             checkBox.setEnabled(true);
         }
-        else if (parkingLot.getStatus() == "besetzt" || parkingLot.getStatus() == "reserviert"){
+        else if (parkingLot.getStatus().equals("besetzt" )|| parkingLot.getStatus().equals("reserviert")){
 
-            if (parkingLot.getStatus() == "reserviert"){
+            if (parkingLot.getStatus().equals("reserviert")){
                 checkBox.setChecked(true);
             }
             checkBox.setEnabled(false);
         }
 
 
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parkingLot.setStatus("reserviert");
+
+                String var = "reserviert";
+                ContentValues values = new ContentValues();
+                values.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_STATE, var);
+
+                String selection = ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_ID + " = " + parkingLot.getId();
+
+                int count = db.update(
+                        ParkinglotContract.ParkinglotEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        null);
+
+                System.out.println("Rows affected: " + count);
+
+                notifyDataSetChanged();
+
+            }
+        });
 
         return checkBox;
     }
 
     public View renderFreigeben(final ParkingLot parkingLot){
-        CheckBox checkBox = new CheckBox(getContext());
+        final CheckBox checkBox = new CheckBox(getContext());
 
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                parkingLot.setStatus("frei");
-                notifyDataSetChanged();
-            }
-        });
-
-        if (parkingLot.getStatus()=="besetzt" || parkingLot.getStatus()=="reserviert"){
+        if (parkingLot.getStatus().equals("besetzt") || parkingLot.getStatus().equals("reserviert")){
             checkBox.setEnabled(true);
         }
         else{
             checkBox.setEnabled(false);
             return null;
         }
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parkingLot.setStatus("frei");
+
+                checkBox.setChecked(true);
+
+                String var = "frei";
+                ContentValues values = new ContentValues();
+                values.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_STATE, var);
+
+                String selection = ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_ID + " = " + parkingLot.getId();
+
+                int count = db.update(
+                        ParkinglotContract.ParkinglotEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        null);
+
+                System.out.println("Rows affected: " + count);
+
+                notifyDataSetChanged();
+            }
+        });
 
         return checkBox;
     }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import at.se.fhcampus.parkma2.controller.ParkingLotController;
 import at.se.fhcampus.parkma2.models.ParkingLot;
+import at.se.fhcampus.parkma2.models.User;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -25,6 +26,15 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        //Delete DB
+        getApplicationContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);
+
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
+
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        final ArrayList<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+
         relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayout);
 
         animationDrawable =(AnimationDrawable)relativeLayout.getBackground();
@@ -33,24 +43,26 @@ public class StartActivity extends AppCompatActivity {
 
         animationDrawable.start();
 
-        //Delete DB
-        getApplicationContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);
-
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
-
-        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-
         ContentValues values = new ContentValues();
 
-        final ArrayList<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
-        parkingLots.add(new ParkingLot("1","frei"));
-        parkingLots.add(new ParkingLot("2","frei"));
+        /**
+         * generate the parkinglots
+         */
+        parkingLots.add(new ParkingLot("1","besetzt"));
+        parkingLots.add(new ParkingLot("2","reserviert"));
         parkingLots.add(new ParkingLot("3","frei"));
         parkingLots.add(new ParkingLot("4","frei"));
         parkingLots.add(new ParkingLot("5","frei"));
         parkingLots.add(new ParkingLot("6","frei"));
         parkingLots.add(new ParkingLot("7","frei"));
+        parkingLots.add(new ParkingLot("8","frei"));
+        parkingLots.add(new ParkingLot("9","frei"));
+        parkingLots.add(new ParkingLot("10","frei"));
 
+
+        /**
+         * fill the DB_Parkinglots with the Data in Arraylist
+         */
         for (ParkingLot p : parkingLots){
 
             values.put(ParkinglotContract.ParkinglotEntry.COLUMN_NAME_PARKINGLOT_ID, p.getId());

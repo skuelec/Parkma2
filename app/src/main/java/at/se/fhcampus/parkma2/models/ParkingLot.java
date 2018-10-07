@@ -1,6 +1,10 @@
 package at.se.fhcampus.parkma2.models;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import java.io.Serializable;
+
+import at.se.fhcampus.parkma2.DatabaseHelper;
 
 /**
  * Created by kuele on 27.12.2017.
